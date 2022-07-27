@@ -1,0 +1,57 @@
+<scheme>
+	<confirm>
+		f
+	</confirm>
+
+	<cancel>
+		escape
+	</cancel>
+
+	<action>
+		space
+	</action>
+
+	<up>
+		w
+	</up>
+
+	<down>
+		s
+	</down>
+
+	<left>
+		a
+	</left>
+
+	<right>
+		d
+	</right>
+
+	<journal>
+		tab
+	</journal>
+
+	<inventory>
+		i
+	</inventory>
+
+	<switch_left>
+		q
+	</switch_left>
+
+	<switch_right>
+		e
+	</switch_right>
+
+	<console>
+		backquote
+	</console>
+
+	<scroll_up>
+		uparrow
+	</scroll_up>
+
+	<scroll_down>
+		downarrow
+	</scroll_down>
+</scheme>
