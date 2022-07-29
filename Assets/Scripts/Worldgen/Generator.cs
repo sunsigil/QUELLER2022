@@ -4,38 +4,43 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    [Header("Prefabs")]
-
-    [SerializeField]
-    float tile_size;
-    [SerializeField]
-    GameObject floor_tile;
-
-    [Header("Generation")]
-
     [SerializeField]
     Texture2D blueprint;
     [SerializeField]
+    Genset genset;
+    [SerializeField]
     Vector3 origin;
 
-    Transform floor;
+    Transform town;
+
+    bool CheckPixel(int x, int y)
+    { return blueprint.GetPixel(x, y).Equals(Color.red); }
 
     void Awake()
     {
-        floor = new GameObject("Floor").transform;
-        floor.position = origin;
+        genset.Prime();
 
-        for(int i = 0; i < blueprint.width; i++)
+        town = new GameObject("Town").transform;
+        town.position = origin;
+
+        for(int i = 1; i < blueprint.width-1; i++)
         {
-            for(int j = 0; j < blueprint.height; j++)
+            for(int j = 1; j < blueprint.height-1; j++)
             {
-                if(blueprint.GetPixel(i, j).Equals(Color.red))
-                {
-                    Transform floor_piece = Instantiate(floor_tile).transform;
-                    floor_piece.gameObject.name = $"Floor ({i}, {j})";
-                    floor_piece.position = origin + new Vector3(i, 0, j) * tile_size;
-                    floor_piece.SetParent(floor);
-                }
+                if(!CheckPixel(i, j)){ continue; }
+
+                int bits = 0;
+                if(CheckPixel(i, j+1)){ bits |= 8; } // N
+                if(CheckPixel(i-1, j)){ bits |= 4; } // W
+                if(CheckPixel(i+1, j)){ bits |= 2; } // E
+                if(CheckPixel(i, j-1)){ bits |= 1; } // S
+
+                print($"{i} {j} {bits}");
+
+                Transform piece = genset.BitmaskTile(bits).transform;
+                piece.gameObject.name = $"Town ({i}, {j}) [{System.Convert.ToString(bits, 2)}]";
+                piece.position = origin + new Vector3(i, 0, j) * genset.tile_size;
+                piece.SetParent(town);
             }
         }
     }

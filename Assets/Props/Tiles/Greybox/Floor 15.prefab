@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6959131612383508081}
   - component: {fileID: 6959131612383508082}
   m_Layer: 0
-  m_Name: Basic Floor 1
+  m_Name: Floor 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

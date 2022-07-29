@@ -404,10 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8489fcd83927c42b5396afc3fe3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile_size: 10
-  floor_tile: {fileID: 6959131612383508083, guid: 8372df78a92646547a83de8437e2e373,
-    type: 3}
   blueprint: {fileID: 2800000, guid: e4d04afecfe133d41bb05b28595759ed, type: 3}
+  genset: {fileID: 11400000, guid: e9da95b7b935c98449c897690cb165b1, type: 2}
   origin: {x: 0, y: 0, z: 0}
 --- !u!114 &564135508
 MonoBehaviour:
