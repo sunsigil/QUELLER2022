@@ -7,10 +7,6 @@
 		escape
 	</cancel>
 
-	<action>
-		space
-	</action>
-
 	<up>
 		w
 	</up>
@@ -26,6 +22,18 @@
 	<right>
 		d
 	</right>
+	
+	<jump>
+		space
+	</jump>
+	
+	<rhand>
+		mouse0
+	</rhand>
+	
+	<lhand>
+		mouse1
+	</lhand>
 
 	<journal>
 		tab

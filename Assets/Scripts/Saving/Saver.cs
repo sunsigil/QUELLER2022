@@ -9,7 +9,10 @@ public class Saver : MonoBehaviour
     [SerializeField]
     string save_path;
     string full_save_path => $"{Application.persistentDataPath}\\{save_path}";
-
+	
+	[SerializeField]
+	bool operate;
+	
     List<ISavable> FindSavables()
     {
         List<ISavable> savables = new List<ISavable>();
@@ -35,6 +38,8 @@ public class Saver : MonoBehaviour
 
     public void Save()
     {
+		if(!operate){ return; }
+		
         List<ISavable> savables = FindSavables();
         StreamWriter writer = new StreamWriter(full_save_path);
 
@@ -58,6 +63,8 @@ public class Saver : MonoBehaviour
 
     public void Load()
     {
+		if(!operate){ return; }
+		
         List<ISavable> savables = FindSavables();
 
         StreamReader reader = new StreamReader(full_save_path);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1281709960567710572}
   - component: {fileID: 8618213362547721645}
   - component: {fileID: 349574567860297539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2004723939976576257}
   - component: {fileID: 1110057577480348727}
   - component: {fileID: 5441559570152611741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Edge (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 6959131612383508080}
   - component: {fileID: 6959131612383508081}
   - component: {fileID: 6959131612383508082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Corner 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

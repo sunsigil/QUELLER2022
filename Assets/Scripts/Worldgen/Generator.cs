@@ -35,8 +35,6 @@ public class Generator : MonoBehaviour
                 if(CheckPixel(i+1, j)){ bits |= 2; } // E
                 if(CheckPixel(i, j-1)){ bits |= 1; } // S
 
-                print($"{i} {j} {bits}");
-
                 Transform piece = genset.BitmaskTile(bits).transform;
                 piece.gameObject.name = $"Town ({i}, {j}) [{System.Convert.ToString(bits, 2)}]";
                 piece.position = origin + new Vector3(i, 0, j) * genset.tile_size;
@@ -44,4 +42,28 @@ public class Generator : MonoBehaviour
             }
         }
     }
+	
+	void OnDrawGizmos()
+	{
+		if(blueprint != null && genset != null)
+		{
+			Color color = Color.white;
+			color.a = 0.25f;
+			Gizmos.color = color;
+			
+			for(int i = 1; i < blueprint.width-1; i++)
+			{
+				for(int j = 1; j < blueprint.height-1; j++)
+				{
+					if(!CheckPixel(i, j)){ continue; }
+						
+					Vector3 pos = origin + Vector3.up * 0.5f;
+					pos += new Vector3(i, 0, j);
+					pos *= genset.tile_size;
+					
+					Gizmos.DrawCube(pos, Vector3.one * genset.tile_size);
+				}
+			}
+		}
+	}
 }
