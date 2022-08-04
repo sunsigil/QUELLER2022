@@ -1,38 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class RTreeGizmo : MonoBehaviour
 {
 	[SerializeField]
 	bool gizmoid;
-	
-	RTree<PathCell> tree;
-	PathCell[] cells;
-	
+
+	static RTree<PathCell> tree;
+	static PathCell[] cells;
+	static int counter;
+
 	void Start()
 	{
 		tree = new RTree<PathCell>();
 		cells = FindObjectsOfType<PathCell>();
-		foreach(PathCell cell in cells)
-		{ tree.Insert(cell); }
-		
-		List<RNode> elements = tree.Elements();
+		counter = 0;
+
+		/*List<RNode> elements = tree.Elements();
 		List<PathCell> entries = tree.Entries();
 		int el = elements.Count;
 		int en = entries.Count;
 		int i = 0;
-		
+
 		Bounds[] mbrs = new Bounds[el + en];
 		for(; i < en; i++)
 		{ mbrs[i] = entries[i].MBR(); }
 		int offset = i;
 		for(; i < offset + el; i++)
 		{ mbrs[i] = elements[i-offset].MBR(); }
-		
+
 		Vector4[] images = new Vector4[mbrs.Length * 4];
 		Vector3Int[] colours = new Vector3Int[images.Length];
-		
+
 		for(i = 0; i < mbrs.Length; i++)
 		{
 			Vector4[] image = mbrs[i].Vectorize();
@@ -42,14 +43,24 @@ public class RTreeGizmo : MonoBehaviour
 				colours[i * 4 + j] = i < en ? new Vector3Int(0, 0, 0) : new Vector3Int(255, 0, 0);
 			}
 		}
-		
-		Bresenhammer.Draw(images, colours, 512, "rtree");
+
+		Bresenhammer.Draw(images, colours, 512, "rtree");*/
 	}
-	
+
+	[MenuItem("MyMenu/Next _n")]
+	public static void Next()
+	{
+		if(counter < cells.Length)
+		{
+			tree.Insert(cells[counter]);
+			counter++;
+		}
+	}
+
 	void OnDrawGizmos()
 	{
 		if(!gizmoid){ return; }
-		
+
 		if(tree != null)
 		{
 			List<RNode> elements = tree.Elements();
@@ -57,14 +68,14 @@ public class RTreeGizmo : MonoBehaviour
 			int el = elements.Count;
 			int en = entries.Count;
 			int i = 0;
-			
+
 			Bounds[] mbrs = new Bounds[el + en];
 			for(; i < en; i++)
 			{ mbrs[i] = entries[i].MBR(); }
 			int offset = i;
 			for(; i < offset + el; i++)
 			{ mbrs[i] = elements[i-offset].MBR(); }
-		
+
 			for(i = 0; i < mbrs.Length; i++)
 			{
 				Gizmos.color = i < en ? Color.green : Color.red;
