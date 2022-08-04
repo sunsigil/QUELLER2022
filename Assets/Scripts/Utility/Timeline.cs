@@ -8,11 +8,11 @@ public class Timeline
 	float timer;
 	public float progress => (duration != 0) ? (timer / duration) : 1;
 
-	public void Initialize(float offset){ timer = Mathf.Clamp(offset, 0, duration); }
-	public void Tick(float dt){ timer = Mathf.Clamp(timer + dt, 0, duration); }
-	public bool Evaluate(){ return progress >= 1; }
-
-	public string ToString() { return $"{progress} : {timer} / {duration}"; }
+	public float Tick(float dt)
+	{
+		timer = Mathf.Clamp(timer + dt, 0, duration);
+		return progress;
+	}
 
 	public Timeline(float duration)
 	{

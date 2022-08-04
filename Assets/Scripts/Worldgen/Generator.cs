@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
+	[SerializeField]
+	bool gizmoid;
+	
     [SerializeField]
     Texture2D blueprint;
     [SerializeField]
@@ -45,6 +48,8 @@ public class Generator : MonoBehaviour
 	
 	void OnDrawGizmos()
 	{
+		if(!gizmoid){ return; }
+		
 		if(blueprint != null && genset != null)
 		{
 			Color color = Color.white;
@@ -61,7 +66,7 @@ public class Generator : MonoBehaviour
 					pos += new Vector3(i, 0, j);
 					pos *= genset.tile_size;
 					
-					Gizmos.DrawCube(pos, Vector3.one * genset.tile_size);
+					Gizmos.DrawWireCube(pos, Vector3.one * genset.tile_size);
 				}
 			}
 		}

@@ -7,6 +7,9 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField]
 	GameObject prefab;
 	
+	[SerializeField]
+	Color colour = Color.green;
+	
 	GameObject instance;
 	
 	public void Orient()
@@ -23,7 +26,7 @@ public class SpawnPoint : MonoBehaviour
 	
 	void OnDrawGizmos()
 	{
-		Gizmos.color = Color.green;
+		Gizmos.color = colour;
 		Gizmos.DrawCube(transform.position, new Vector3(1, 2, 1));
 		Gizmos.DrawLine(transform.position, transform.position + transform.forward);
 	}

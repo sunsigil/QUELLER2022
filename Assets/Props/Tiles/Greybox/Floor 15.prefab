@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6959131612383508080}
   - component: {fileID: 6959131612383508081}
   - component: {fileID: 6959131612383508082}
+  - component: {fileID: 661304576955565018}
   m_Layer: 7
   m_Name: Floor 15
   m_TagString: Untagged
@@ -98,3 +99,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &661304576955565018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959131612383508083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976a93258c16f46488a6b47090418ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

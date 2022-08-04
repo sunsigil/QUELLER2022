@@ -58,7 +58,7 @@ public class Combatant : MonoBehaviour
 	public bool EnqueueAttack(Attack attack)
 	{
 		if(invincible){ return false; }
-		if(!nohurt_timeline.Evaluate()){ return false; }
+		if(nohurt_timeline.progress < 1){ return false; }
 
 		if(attack.sender == this){ return false; }
 		if(attack.sender.faction == _faction){ return false; }

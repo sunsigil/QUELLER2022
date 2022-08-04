@@ -40,6 +40,7 @@ public class User : MonoBehaviour, ISavable
     Controller controller;
     Rigidbody rigidbody;
 	CapsuleCollider capsule_collider;
+	Animator animator;
 	
 	float frame_yaw;
 	float frame_pitch;
@@ -124,6 +125,7 @@ public class User : MonoBehaviour, ISavable
         controller = GetComponent<Controller>();
         rigidbody = GetComponent<Rigidbody>();
 		capsule_collider = GetComponent<CapsuleCollider>();
+		animator = GetComponentInChildren<Animator>();
 		
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -158,6 +160,15 @@ public class User : MonoBehaviour, ISavable
 				point.Orient();
 			}
 		}
+		
+		if(controller.Pressed(InputCode.RHAND))
+		{
+			animator.SetTrigger("Swipe");
+		}
+		else if(controller.Pressed(InputCode.LHAND))
+		{
+			animator.SetTrigger("Stab");
+		}
     }
 
     void FixedUpdate()
@@ -169,7 +180,7 @@ public class User : MonoBehaviour, ISavable
 		CheckBumping();
 		
 		if(!grounded)
-		{ jump_vel -= Vector3.up * gravity * Time.fixedDeltaTime; }
+		{ jump_vel -= Vector3.up * gravity * Time.fixedDeltaTime;  }
 		else if(!last_grounded)
 		{ jump_vel = Vector3.zero; }
 		
