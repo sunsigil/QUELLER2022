@@ -49,3 +49,9 @@ public enum UsableState
     BLOCKED,
     ACTIVE
 }
+
+public enum AngleMode
+{
+	CLOCKWISE,
+	ANTICLOCKWISE
+}

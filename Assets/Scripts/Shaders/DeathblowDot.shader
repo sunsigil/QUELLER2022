@@ -1,4 +1,4 @@
-Shader "Unlit/DeathblowDot"
+Shader "Unlit/Deathblow Dot"
 {
     Properties
     {

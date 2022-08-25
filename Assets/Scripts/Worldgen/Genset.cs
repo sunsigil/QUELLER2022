@@ -30,6 +30,7 @@ public class Genset : ScriptableObject
     GameObject floor_15;
 
     GameObject[] tiles;
+	Transform palette;
 
     public void Prime()
     {
@@ -55,8 +56,13 @@ public class Genset : ScriptableObject
             Instantiate(floor_15) // 15
         };
 
-        foreach(GameObject tile in tiles){ tile.transform.localScale = Vector3.one * tile_scale; }
-        foreach(GameObject tile in tiles){ tile.SetActive(false); }
+		palette = new GameObject($"{name} Palette").transform;
+        foreach(GameObject tile in tiles)
+		{
+			tile.transform.localScale = Vector3.one * tile_scale;
+			tile.SetActive(false);
+			tile.transform.SetParent(palette);
+		}
     }
 
     public GameObject BitmaskTile(int bits)

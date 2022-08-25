@@ -14,6 +14,9 @@ public class Timeline
 		return progress;
 	}
 
+	public void Reset()
+	{ timer = 0; }
+
 	public Timeline(float duration)
 	{
 		this.duration = duration;

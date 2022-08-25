@@ -41,6 +41,8 @@ public class User : MonoBehaviour, ISavable
     Rigidbody rigidbody;
 	CapsuleCollider capsule_collider;
 	Animator animator;
+	Combatant combatant;
+	Spellcaster spellcaster;
 	
 	float frame_yaw;
 	float frame_pitch;
@@ -126,6 +128,8 @@ public class User : MonoBehaviour, ISavable
         rigidbody = GetComponent<Rigidbody>();
 		capsule_collider = GetComponent<CapsuleCollider>();
 		animator = GetComponentInChildren<Animator>();
+		combatant = GetComponent<Combatant>();
+		spellcaster = GetComponent<Spellcaster>();
 		
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -152,22 +156,27 @@ public class User : MonoBehaviour, ISavable
 		
 		if(controller.Pressed(InputCode.JUMP) && grounded)
 		{ jump_vel = run_input * jump_thrust.x + Vector3.up * jump_thrust.y; }
-	
-		if(Input.GetKeyDown(KeyCode.F))
+
+		animator.SetBool("Running", run_vel.magnitude >= 0.1f);
+		
+
+		if (controller.Pressed(InputCode.RHAND) || controller.Held(InputCode.RHAND))
+		{
+			spellcaster.Charge(Time.deltaTime * 2);
+			animator.SetBool("Firing", true);
+		}
+		else if (controller.Released(InputCode.RHAND))
+		{
+			spellcaster.Cast();
+			animator.SetBool("Firing", false);
+		}
+
+		if (Input.GetKeyDown(KeyCode.F))
 		{
 			foreach(SpawnPoint point in FindObjectsOfType<SpawnPoint>())
 			{
 				point.Orient();
 			}
-		}
-		
-		if(controller.Pressed(InputCode.RHAND))
-		{
-			animator.SetTrigger("Swipe");
-		}
-		else if(controller.Pressed(InputCode.LHAND))
-		{
-			animator.SetTrigger("Stab");
 		}
     }
 

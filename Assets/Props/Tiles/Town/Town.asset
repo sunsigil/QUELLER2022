@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbbb0599ea5c714a86ad156cfb0b18d, type: 3}
+  m_Name: Town
+  m_EditorClassIdentifier: 
+  tile_width: 10
+  tile_scale: 0.5
+  room_0: {fileID: 6959131612383508083, guid: b6750764ecaacee4c87942cc13bf5221, type: 3}
+  niche_1: {fileID: 6959131612383508083, guid: 7175df48f4f46cd46af054620b896b1e, type: 3}
+  corner_3: {fileID: 6959131612383508083, guid: 5fcc747e2c4470b44abdeadbee44be93,
+    type: 3}
+  hall_6: {fileID: 6959131612383508083, guid: e1777b7973e98c4489ef1874b6a76914, type: 3}
+  edge_7: {fileID: 6959131612383508083, guid: 05b563cd9e998104e9b12b40ddb3a16b, type: 3}
+  floor_15: {fileID: 6959131612383508083, guid: f9a3add9bcdeeba4da1ec0d3e858b57c,
+    type: 3}

@@ -20,6 +20,8 @@ public class Controller : MonoBehaviour
         set => _scheme = value;
     }
 
+    ControllerRegistry registry;
+
     bool _is_registered;
     public bool is_registered
     {
@@ -58,22 +60,24 @@ public class Controller : MonoBehaviour
 
     void OnEnable()
     {
-        if(_unmanaged){return;}
+        if(_unmanaged)
+        {return;}
 
-        if(!ControllerRegistry._){return;}
+        registry = FindObjectOfType<ControllerRegistry>();
+        if(registry == null || !registry.primed)
+        {return;}
 
-        ControllerRegistry._.Register(this);
+        registry.Register(this);
     }
 
     void OnDisable()
     {
-        if(_unmanaged){return;}
+        if(_unmanaged)
+        {return;}
 
-        if(!ControllerRegistry._){return;}
+        if(registry == null || !registry.primed)
+        { return;  }
 
-        if(_is_registered)
-        {
-            ControllerRegistry._.Deregister(this);
-        }
+        registry.Deregister(this);
     }
 }

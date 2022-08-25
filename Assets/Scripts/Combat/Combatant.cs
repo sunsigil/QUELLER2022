@@ -28,6 +28,13 @@ public class Combatant : MonoBehaviour
 	public UnityEvent on_deplete => _on_deplete;
 	UnityEvent _on_die;
 	public UnityEvent on_die => _on_die;
+	
+	Combatant _adversary;
+	public Combatant adversary => _adversary;
+	UnityEvent _on_targeted;
+	public UnityEvent on_targeted => _on_targeted;
+	UnityEvent _on_untargeted;
+	public UnityEvent on_untargeted => _on_untargeted;
 
 	void ProcessAttack(Attack attack)
 	{
@@ -68,6 +75,18 @@ public class Combatant : MonoBehaviour
 
 		return true;
 	}
+	
+	public void Target(Combatant other)
+	{
+		if(other == this){ return; }
+		if(other == _adversary){ return; }
+		
+		if(_adversary != null)
+		{ _adversary.on_untargeted.Invoke(); }
+
+		if((_adversary = other) != null)
+		{ _adversary.on_targeted.Invoke(); }
+	}
 
 	void Awake()
 	{
@@ -79,6 +98,9 @@ public class Combatant : MonoBehaviour
 		_on_hurt = new UnityEvent();
 		_on_deplete = new UnityEvent();
 		_on_die = new UnityEvent();
+		
+		_on_targeted = new UnityEvent();
+		_on_untargeted = new UnityEvent();
 	}
 
 	void Update()

@@ -44,6 +44,14 @@ public class Generator : MonoBehaviour
                 piece.SetParent(town);
             }
         }
+
+		PathCell[] mesh_targets = FindObjectsOfType<PathCell>();
+		Vector3[] positions = new Vector3[mesh_targets.Length];
+		for(int i = 0; i < positions.Length; i++)
+		{ positions[i] = mesh_targets[i].transform.position; }
+
+		Mesh2D mesh = new Mesh2D(positions);
+		Bresenhammer.Draw(mesh.Vectorize(), 2048, "mesh");
     }
 	
 	void OnDrawGizmos()
