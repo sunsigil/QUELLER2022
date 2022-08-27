@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _faction: 1
   _max_lives: 1
-  hurt_cooldown: 1
+  hurt_cooldown: 0.1
 --- !u!114 &6827763485264710055
 MonoBehaviour:
   m_ObjectHideFlags: 0
