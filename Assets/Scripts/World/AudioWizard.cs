@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class AudioWizard : MonoBehaviour
 {
-	static AudioWizard instance;
-    public static AudioWizard _ => instance;
+	[SerializeField]
+	[Range(0, 1)]
+	float music_volume;
+	[SerializeField]
+	[Range(0, 1)]
+	float effect_volume;
 
 	[SerializeField]
 	int garbage_threshold;
@@ -74,12 +78,11 @@ public class AudioWizard : MonoBehaviour
 		}
 
 		if(source == null)
-		{
-			source = new GameObject("Effect Source").AddComponent<AudioSource>();
-		}
+		{ source = new GameObject("Effect Source").AddComponent<AudioSource>(); }
 
 		source.clip = clip;
 		source.spatialize = false;
+		source.volume = effect_volume;
 		source.Play();
 	}
 
@@ -96,14 +99,12 @@ public class AudioWizard : MonoBehaviour
 
 	void Awake()
 	{
-		if(!instance){instance = this;}
-		else{Destroy(gameObject);}
-
 		clip_map = AssetTools.ResourceMap<AudioClip>("Clips");
 		music_stack = new Stack<Pair<GameObject, AudioClip>>();
 
 		music_source = new GameObject("Music Source").AddComponent<AudioSource>();
 		music_source.spatialize = false;
+		music_source.volume = music_volume;
 		music_source.loop = true;
 
 		effect_source_pool = new List<AudioSource>();

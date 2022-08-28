@@ -18,13 +18,12 @@ public class ConsoleHandler : Controller
     {
         string[] commands = startup_file.text.Split('\n');
 
-        if(console_instance != null){ Destroy(console_instance.gameObject); }
+        if(console_instance != null)
+        { Destroy(console_instance.gameObject); }
         console_instance = AssetTools.InitGet(console_prefab);
 
         foreach(string command in commands)
-        {
-            console_instance.Process(command);
-        }
+        { console_instance.Process(command); }
 
         Destroy(console_instance.gameObject);
     }
@@ -36,8 +35,10 @@ public class ConsoleHandler : Controller
         {
             if(enable_commands)
             {
-                if(console_instance == null){ console_instance = AssetTools.InitGet(console_prefab); }
-                else{ Destroy(console_instance.gameObject); }
+                if(console_instance == null)
+                { console_instance = AssetTools.InitGet(console_prefab); }
+                else
+                { Destroy(console_instance.gameObject); }
             }
             else
             {
@@ -45,8 +46,6 @@ public class ConsoleHandler : Controller
 
                 if(open_attempts >= 10)
                 {
-                    //PopupBar popup_bar = AssetTools.SpawnComponent(popup_bar_prefab);
-                    //popup_bar.message = "No, you really can't use console commands";
                     Debug.Log("No, you really can't use console commands");
                     open_attempts = 0;
                 }

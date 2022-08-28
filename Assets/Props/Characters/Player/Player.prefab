@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &643811655041239597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3328603524743842083}
+  m_Layer: 8
+  m_Name: Shot Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3328603524743842083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643811655041239597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.524, y: -0, z: 0.186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4080930009028895000}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &711589110436253143
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +192,7 @@ GameObject:
   - component: {fileID: 8954428869830798930}
   - component: {fileID: 5235713011458158408}
   - component: {fileID: 8236451968249647578}
+  - component: {fileID: 7101584859758236447}
   - component: {fileID: 3997824610892249454}
   m_Layer: 3
   m_Name: Player
@@ -328,8 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch_range: 180
-  pitch_sensitivity: 50
-  yaw_sensitivity: 50
+  pitch_sensitivity: 100
+  yaw_sensitivity: 160
   cam_anchor: {fileID: 5049513216830244136}
   weapon_anchor: {fileID: 3509921169775635309}
 --- !u!114 &5235713011458158408
@@ -368,6 +400,23 @@ MonoBehaviour:
   projectile_prefab: {fileID: 7005633803916983937, guid: 2a9da3f8a2a5cfa48be65b9455089684,
     type: 3}
   projectile_anchor: {fileID: 6087461682834776442}
+--- !u!114 &7101584859758236447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997824610892249451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ee10a1f9f17a140a40a421f45a84dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trail_prefab: {fileID: 2531531626625389650, guid: 5063843ad3ac5d74b9b97223a0c983ea,
+    type: 3}
+  damage: 1
+  lethal: 1
+  shot_anchor: {fileID: 3328603524743842083}
 --- !u!114 &3997824610892249454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,12 +696,12 @@ PrefabInstance:
     - target: {fileID: 5364207419109598804, guid: a23e89883d26099459c1087cdf97391c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5364207419109598804, guid: a23e89883d26099459c1087cdf97391c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5364207419109598804, guid: a23e89883d26099459c1087cdf97391c,
         type: 3}

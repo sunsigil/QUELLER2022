@@ -11,17 +11,23 @@ public class SpawnPoint : MonoBehaviour
 	Color colour = Color.green;
 	
 	GameObject instance;
-	
-	public void Orient()
+
+	public void Reorient()
 	{
 		instance.transform.position = transform.position;
 		instance.transform.rotation = transform.rotation;
 	}
+
+	public void Respawn()
+    {
+		Destroy(instance);
+		instance = Instantiate(prefab);
+		Reorient();
+	}
 	
 	void Awake()
 	{
-		instance = Instantiate(prefab);
-		Orient();
+		Respawn();
 	}
 	
 	void OnDrawGizmos()

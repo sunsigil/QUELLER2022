@@ -1,16 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class CommandConsole : Controller
+public class CommandConsole : MonoBehaviour
 {
-    Controller controller;
-
+    [SerializeField]
     TextMeshProUGUI log;
+    [SerializeField]
     TMP_InputField prompt;
+
+    Controller controller;
 
     string log_string;
     Stack<string> command_stack;
@@ -29,6 +29,7 @@ public class CommandConsole : Controller
         Log("reset [WARNING: WILL DELETE SAVE DATA]");
         Log("toggle_music <toggle: bool>");
         Log("play_clip <name: string>");
+        Log("respawn");
     }
 
     void Clear()
@@ -99,6 +100,12 @@ public class CommandConsole : Controller
 
         if(!audio_wizard.PlayEffect(clip_str)){ Log($"Error: clip {clip_str} not found"); }
     }
+
+    void Respawn()
+    {
+        foreach(SpawnPoint point in FindObjectsOfType<SpawnPoint>())
+        { point.Respawn(); }
+    }
 #endregion
 
 #region ONSUBMIT_FUNCS
@@ -158,6 +165,9 @@ public class CommandConsole : Controller
             case "play_clip":
                 PlayClip(command_stack);
                 break;
+            case "respawn":
+                Respawn();
+                break;
             default:
                 Log($"Unknown operation: {op}");
                 break;
@@ -184,13 +194,10 @@ public class CommandConsole : Controller
     {
         controller = GetComponent<Controller>();
 
-        log = GetComponentInChildren<TextMeshProUGUI>();
-        prompt = GetComponentInChildren<TMP_InputField>();
-
         command_record = new List<string>();
         record_index = 0;
 
-        prompt.onSubmit.AddListener(Process);
+        prompt.onSubmit.AddListener(Process);     
     }
 
     void Update()
@@ -218,5 +225,17 @@ public class CommandConsole : Controller
             }
         }
     }
-#endregion
+
+    void OnEnable()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    void OnDisable()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    #endregion
 }
