@@ -29,7 +29,7 @@ public class Dummy : MonoBehaviour
 	
 	void Die()
 	{ 
-		audio_wizard.PlayEffect("death");
+		audio_wizard.PlayEffect("bb_gore");
 		Destroy(gameObject);
 	}
 	

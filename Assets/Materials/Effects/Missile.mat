@@ -108,12 +108,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EnvironmentReflections: 1
+    - _Fade: 0
     - _Fade_Max: 0.1
     - _Fade_Min: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Jitter_Resolution: 8
+    - _Jitter_Resolution: 64
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -130,7 +131,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 0.38510543, b: 0, a: 0.54509807}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.06964257, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 0.009412464, b: 0, a: 1}
     - _Fade_Color: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

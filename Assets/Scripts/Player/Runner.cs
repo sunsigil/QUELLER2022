@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Runner : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class Runner : MonoBehaviour
 	float ground_dist;
 	bool grounded;
 	bool last_grounded;
+	UnityEvent _on_grounded;
+	public UnityEvent on_grounded => _on_grounded;
 
 	float bump_dist;
 	bool last_bumping;
@@ -52,6 +55,9 @@ public class Runner : MonoBehaviour
 			grounded = ground_dist < grounding_tolerance;
 		}
 		else { grounded = false; }
+
+		if(!last_grounded && grounded)
+		{ _on_grounded.Invoke(); }
 	}
 
 	void CheckBumping()
@@ -78,6 +84,8 @@ public class Runner : MonoBehaviour
 		controller = GetComponent<Controller>();
 		rigidbody = GetComponent<Rigidbody>();
 		capsule_collider = GetComponent<CapsuleCollider>();
+
+		_on_grounded = new UnityEvent();
 
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;

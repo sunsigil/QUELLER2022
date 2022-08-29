@@ -20,6 +20,9 @@ public class Spellcaster : MonoBehaviour
     [SerializeField]
     Transform projectile_anchor;
 
+    // Outsiders
+    AudioWizard audio_wizard;
+
     // Components
     Controller controller;
     Combatant combatant;
@@ -42,6 +45,8 @@ public class Spellcaster : MonoBehaviour
         projectile.velocity = transform.forward * 30;
         projectile.transform.SetParent(null);
         projectile.Activate();
+
+        audio_wizard.PlayEffect("bb_restore");
     }
 
     public void Charge(float amount)
@@ -58,6 +63,8 @@ public class Spellcaster : MonoBehaviour
 
     void Awake()
     {
+        audio_wizard = FindObjectOfType<AudioWizard>();
+
         controller = GetComponent<Controller>();
         combatant = GetComponent<Combatant>();
 

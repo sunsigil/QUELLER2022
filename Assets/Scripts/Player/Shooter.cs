@@ -6,6 +6,8 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField]
     TrailRenderer trail_prefab;
+    [SerializeField]
+    BulletLine line_prefab;
 
     [SerializeField]
     int damage;
@@ -21,30 +23,40 @@ public class Shooter : MonoBehaviour
 
     AudioWizard audio_wizard;
 
-    
+    Vector3 GetTrajectory()
+    {
+        Vector3 eye_pos = Camera.main.transform.position;
+        Vector3 eye_dir = Camera.main.transform.forward;
+        float gaze_length = Mathf.Infinity;
+        RaycastHit gaze_hit;
+
+        Vector3 farpoint = eye_pos + eye_dir * 50;
+        if(Physics.Raycast(eye_pos, eye_dir, out gaze_hit, gaze_length))
+        { farpoint = gaze_hit.point; }
+
+        return farpoint - shot_anchor.position;
+    }
 
     public void Fire()
     {
-        audio_wizard.PlayEffect("vineboom"); 
+        audio_wizard.PlayEffect("bb_gun_blunt");
 
-        TrailRenderer trail = Instantiate(trail_prefab);
-        trail.transform.position = shot_anchor.position;
+        BulletLine line = Instantiate(line_prefab);
 
         Vector3 pos = shot_anchor.position;
-        Vector3 dir = transform.forward;
+        Vector3 dir = GetTrajectory();
         float dist = Mathf.Infinity;
         RaycastHit hit;
 
         if(Physics.Raycast(pos, dir, out hit, dist))
         {
-            print(hit.transform.position);
             Combatant target = hit.transform.GetComponent<Combatant>();
             if(target != null)
             { target.EnqueueAttack(new Attack(combatant, dir, damage, lethal)); }
-            trail.transform.position = hit.transform.position;
+            line.Initialize(pos, hit.point, 100);
         }
         else
-        { trail.transform.position = pos + dir * 50; }
+        { line.Initialize(pos, pos + dir * 50, 100); }
     }
 
     void Awake()
@@ -56,4 +68,13 @@ public class Shooter : MonoBehaviour
 
     void Start()
     { audio_wizard.PushMusic(gameObject, "DOOM_music_1"); }
+
+    private void OnDrawGizmos()
+    {
+        if(shot_anchor)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(shot_anchor.position, shot_anchor.position + shot_anchor.forward);
+        }
+    }
 }

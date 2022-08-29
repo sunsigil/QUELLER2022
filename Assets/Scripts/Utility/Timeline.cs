@@ -7,6 +7,7 @@ public class Timeline
 	float duration;
 	float timer;
 	public float progress => (duration != 0) ? (timer / duration) : 1;
+	public bool finished => progress >= 1;
 
 	public float Tick(float dt)
 	{

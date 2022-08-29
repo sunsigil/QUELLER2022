@@ -528,8 +528,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecc651e67ecd2b47966a8dd15a4cf29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music_volume: 0.51
-  effect_volume: 0.263
+  music_mixer: {fileID: -2780117001274780269, guid: fc353a50dc3387c4ba93083e756e7daf,
+    type: 2}
+  effect_mixer: {fileID: -4168169227181882061, guid: 569193b79b1f0ae43b8b9683233c58aa,
+    type: 2}
   garbage_threshold: 50
   garbage_cooldown: 5
 --- !u!114 &564135512
@@ -1213,7 +1215,7 @@ GameObject:
   - component: {fileID: 1794220655}
   - component: {fileID: 1794220654}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1237,7 +1239,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 2}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794220654
 MonoBehaviour:
@@ -1252,14 +1254,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4762125, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 23621dd9dd80d2d439bb232617c15ac7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1290,7 +1292,7 @@ GameObject:
   - component: {fileID: 1813648531}
   - component: {fileID: 1813648530}
   m_Layer: 5
-  m_Name: Hud
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1348,7 +1350,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1578,7 +1580,7 @@ PrefabInstance:
     - target: {fileID: 7354584269365188058, guid: 6597bec8a79ad494fac43e013c212828,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.3
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 7354584269365188058, guid: 6597bec8a79ad494fac43e013c212828,
         type: 3}
@@ -1588,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 7354584269365188058, guid: 6597bec8a79ad494fac43e013c212828,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7354584269365188058, guid: 6597bec8a79ad494fac43e013c212828,
         type: 3}

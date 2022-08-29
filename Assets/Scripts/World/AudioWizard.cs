@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioWizard : MonoBehaviour
 {
 	[SerializeField]
-	[Range(0, 1)]
-	float music_volume;
+	AudioMixerGroup music_mixer;
 	[SerializeField]
-	[Range(0, 1)]
-	float effect_volume;
+	AudioMixerGroup effect_mixer;
+	
 
 	[SerializeField]
 	int garbage_threshold;
@@ -81,8 +81,8 @@ public class AudioWizard : MonoBehaviour
 		{ source = new GameObject("Effect Source").AddComponent<AudioSource>(); }
 
 		source.clip = clip;
+		source.outputAudioMixerGroup = effect_mixer;
 		source.spatialize = false;
-		source.volume = effect_volume;
 		source.Play();
 	}
 
@@ -103,8 +103,8 @@ public class AudioWizard : MonoBehaviour
 		music_stack = new Stack<Pair<GameObject, AudioClip>>();
 
 		music_source = new GameObject("Music Source").AddComponent<AudioSource>();
+		music_source.outputAudioMixerGroup = music_mixer;
 		music_source.spatialize = false;
-		music_source.volume = music_volume;
 		music_source.loop = true;
 
 		effect_source_pool = new List<AudioSource>();

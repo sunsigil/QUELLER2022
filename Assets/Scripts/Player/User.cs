@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class User : MonoBehaviour
 {
+	AudioWizard audio_wizard;
+
     Controller controller;
 	Animator animator;
 	Spellcaster spellcaster;
@@ -13,12 +15,20 @@ public class User : MonoBehaviour
 
     void Awake()
     {
+		audio_wizard = FindObjectOfType<AudioWizard>();
+
         controller = GetComponent<Controller>();
 		animator = GetComponentInChildren<Animator>();
 		spellcaster = GetComponent<Spellcaster>();
 		looker = GetComponent<Looker>();
 		runner = GetComponent<Runner>();
 		shooter = GetComponent<Shooter>();
+    }
+
+    void Start()
+    {
+		runner.on_grounded.AddListener(delegate { print("ya"); animator.SetTrigger("Landed"); });
+		audio_wizard.PlayEffect("bb_spawn");
     }
 
     // Update is called once per frame
