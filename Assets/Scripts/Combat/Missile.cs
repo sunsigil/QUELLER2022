@@ -2,43 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Missile : Weapon
+public class Missile : MonoBehaviour, ISpellcaster
 {
-    ParticleSystem particle;
-    Collider collider;
+    [SerializeField]
+    float charge_time;
+    [SerializeField]
+    float min_scale;
+    [SerializeField]
+    float max_scale;
 
-    public void Sleep()
+    [SerializeField]
+    Spell prefab;
+
+    [SerializeField]
+    Transform anchor;
+
+    Spell instance;
+    Timeline charge;
+
+    public void Spawn()
     {
-        collider.enabled = false;
+        instance = Instantiate(prefab, anchor);
+        instance.transform.localScale = Vector3.one * min_scale;
+        instance.Sleep();
 
-        particle.Pause();
+        charge = new Timeline(charge_time);
     }
 
-    public void Prime()
+    public void Charge(float amount)
     {
-        transform.forward = -wielder.transform.up;
-
-        if (!particle.isPlaying)
-        { particle.Play(); }
+        if (instance == null)
+        { Spawn(); }
+        else
+        {
+            charge.Tick(amount);
+            float size = Mathf.Lerp(min_scale, max_scale, charge.progress);
+            instance.transform.localScale = Vector3.one * size;
+        }
     }
 
-    public void Activate()
+    public void Cast()
     {
-        collider.enabled = true;
-        transform.forward = wielder.transform.forward;
+        if(instance == null)
+        { Spawn(); }
+
+        instance.Wake();
+        instance.Launch(transform.forward * 30);
+        instance = null;
     }
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        particle = GetComponent<ParticleSystem>();
-        collider = GetComponent<Collider>();
-    }
-
-    void Start  ()
-    { on_hit.AddListener(delegate { Destroy(gameObject); }); }
-
-    void FixedUpdate()
-    { transform.Translate(_velocity * Time.fixedDeltaTime, Space.World); }
 }

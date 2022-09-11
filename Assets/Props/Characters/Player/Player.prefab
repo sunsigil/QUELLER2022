@@ -159,8 +159,9 @@ GameObject:
   - component: {fileID: 6635668365575865146}
   - component: {fileID: 8954428869830798930}
   - component: {fileID: 5235713011458158408}
-  - component: {fileID: 8236451968249647578}
   - component: {fileID: 7101584859758236447}
+  - component: {fileID: 8853659516396565766}
+  - component: {fileID: 7686591470503577579}
   - component: {fileID: 3997824610892249454}
   m_Layer: 3
   m_Name: Player
@@ -350,24 +351,6 @@ MonoBehaviour:
   jump_thrust: {x: 10, y: 5}
   air_control: 0.75
   gravity: 9.8
---- !u!114 &8236451968249647578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997824610892249451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed6a98dcfbb8001468a5f5e447707472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charge_time: 2
-  min_scale: 0.2
-  max_scale: 0.5
-  projectile_prefab: {fileID: 7005633803916983937, guid: 2a9da3f8a2a5cfa48be65b9455089684,
-    type: 3}
-  projectile_anchor: {fileID: 6411698543947395061}
 --- !u!114 &7101584859758236447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +371,40 @@ MonoBehaviour:
   lethal: 1
   trail_delay: 0
   shot_anchor: {fileID: 6411698543947395061}
+--- !u!114 &8853659516396565766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997824610892249451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100030de31e9a254f9e9b50500f9b57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge_time: 1
+  min_scale: 0.25
+  max_scale: 1
+  prefab: {fileID: 3928585804776232516, guid: 2a9da3f8a2a5cfa48be65b9455089684, type: 3}
+  anchor: {fileID: 6411698543947395061}
+--- !u!114 &7686591470503577579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997824610892249451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0860db7557241244c805980da0a84cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge_time: 3
+  min_count: 1
+  max_count: 10
+  prefab: {fileID: 3928585804776232516, guid: f966ae0a185401d45baf1d706157165a, type: 3}
+  anchor: {fileID: 6411698543947395061}
 --- !u!114 &3997824610892249454
 MonoBehaviour:
   m_ObjectHideFlags: 0

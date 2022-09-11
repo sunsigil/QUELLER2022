@@ -8,22 +8,26 @@ public class User : MonoBehaviour
 
     Controller controller;
 	Animator animator;
-	Spellcaster spellcaster;
 	Looker looker;
 	Runner runner;
 	Shooter shooter;
 
-    void Awake()
+	ISpellcaster[] casters;
+	int caster_index;
+
+	void Awake()
     {
 		audio_wizard = FindObjectOfType<AudioWizard>();
 
         controller = GetComponent<Controller>();
 		animator = GetComponentInChildren<Animator>();
-		spellcaster = GetComponent<Spellcaster>();
 		looker = GetComponent<Looker>();
 		runner = GetComponent<Runner>();
 		shooter = GetComponent<Shooter>();
-    }
+
+		casters = GetComponents<ISpellcaster>();
+		caster_index = 1;
+	}
 
     void Start()
     {
@@ -39,12 +43,12 @@ public class User : MonoBehaviour
 
 		if (controller.Held(InputCode.LHAND))
 		{
-			spellcaster.Charge(Time.deltaTime * 2);
+			casters[caster_index].Charge(Time.deltaTime * 2);
 			animator.SetBool("Firing", true);
 		}
 		else if (controller.Released(InputCode.LHAND))
 		{
-			spellcaster.Cast();
+			casters[caster_index].Cast();
 			animator.SetBool("Firing", false);
 		}
 

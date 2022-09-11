@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5364207419109598804}
   m_Layer: 8
-  m_Name: Arm Fist
+  m_Name: Gunarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
