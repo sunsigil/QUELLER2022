@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5f8a2a1400d5b438de1a2c7b67897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cast_effect: bb_restore
   smoothing: 0
   damage: 1
   lethal: 1

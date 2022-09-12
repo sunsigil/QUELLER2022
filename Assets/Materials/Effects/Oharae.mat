@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Missile
+  m_Name: Oharae
   m_Shader: {fileID: -6465566751694194690, guid: d38c726b86efb9244b47959ab1e75d6c,
     type: 3}
   m_ValidKeywords: []
@@ -131,9 +131,9 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 0.38510543, b: 0, a: 0.54509807}
-    - _Color: {r: 1, g: 0.06964257, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.6469269, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 0.009412464, b: 0, a: 1}
     - _Fade_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Glow: {r: 1, g: 0, b: 0, a: 1}
+    - _Glow: {r: 1, g: 0.6719017, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

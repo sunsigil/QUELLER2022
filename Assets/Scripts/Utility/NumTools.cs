@@ -13,6 +13,9 @@ public static class NumTools
     public static float Flash(float t, float a, float b, float c, float d)
     { return a * t * Mathf.Sin(b * t - c) + d; }
 
+    public static float Fluct(float t, float b, float a, float f)
+    { return a * 0.5f * (Mathf.Sin(2 * Mathf.PI * t) + 1) + b; }
+
     public static float HillStep(float t, float k, bool reverse = false)
     {
         float value = (Mathf.Exp(k * t) - 1) / (Mathf.Exp(k) - 1);

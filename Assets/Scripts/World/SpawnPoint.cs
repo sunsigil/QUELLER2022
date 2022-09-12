@@ -6,7 +6,8 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField]
 	GameObject prefab;
-	
+	[SerializeField]
+	bool looping;
 	[SerializeField]
 	Color colour = Color.green;
 	
@@ -26,11 +27,15 @@ public class SpawnPoint : MonoBehaviour
 	}
 	
 	void Awake()
-	{
-		Respawn();
-	}
-	
-	void OnDrawGizmos()
+	{ Respawn(); }
+
+    private void Update()
+    {
+        if(looping && instance == null)
+		{ Respawn(); }
+    }
+
+    void OnDrawGizmos()
 	{
 		Gizmos.color = colour;
 		Gizmos.DrawCube(transform.position, new Vector3(1, 2, 1));

@@ -57,8 +57,8 @@ Shader "Unlit/Deathblow Dot"
                 
 				float2 spoke = i.uv - float2(0.5, 0.5);
 				float dist = length(spoke);
-				float t = (_SinTime.w + 1) * 0.25;
-				col.a *= dist < t;
+				float t = 0.25 * 0.5 * (_SinTime.w + 1) + 0.25;
+                col.a = step(dist, t);
 				
                 return col;
             }

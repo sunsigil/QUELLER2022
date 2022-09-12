@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5f8a2a1400d5b438de1a2c7b67897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cast_effect: bb_restore
   smoothing: 0
   damage: 1
   lethal: 1
@@ -125,10 +124,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1756e097921577c41b2e3a1258ac35c7,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1756e097921577c41b2e3a1258ac35c7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4f0fb76e2bb4c4428ea28a4f4b0119c, type: 2}
     - target: {fileID: 919132149155446097, guid: 1756e097921577c41b2e3a1258ac35c7,
         type: 3}
       propertyPath: m_Name
       value: arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1756e097921577c41b2e3a1258ac35c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1756e097921577c41b2e3a1258ac35c7, type: 3}

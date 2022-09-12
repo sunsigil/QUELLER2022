@@ -12,6 +12,7 @@ public class Runner : MonoBehaviour
 
 	[SerializeField]
 	float run_speed;
+
 	[SerializeField]
 	Vector2 jump_thrust;
 	[SerializeField]
@@ -19,13 +20,17 @@ public class Runner : MonoBehaviour
 	[SerializeField]
 	float gravity;
 
+	[SerializeField]
+	float kill_y;
+
 	Controller controller;
 	Rigidbody rigidbody;
 	CapsuleCollider capsule_collider;
 
 	Vector3 run_vel;
 	Vector3 jump_vel;
-	Vector3 vel => run_vel + jump_vel;
+	Vector3 dash_vel;
+	Vector3 vel => run_vel + jump_vel + dash_vel;
 	public bool running => run_vel.magnitude >= 0.1f;
 
 	float ground_dist;
@@ -109,6 +114,9 @@ public class Runner : MonoBehaviour
 
 		if (controller.Pressed(InputCode.JUMP) && grounded)
 		{ jump_vel = run_input * jump_thrust.x + Vector3.up * jump_thrust.y; }
+
+		if (transform.position.y < kill_y)
+        { Destroy(gameObject); }
 	}
 
 	void FixedUpdate()
@@ -126,7 +134,10 @@ public class Runner : MonoBehaviour
 			run_vel = Vector3.zero;
 
 			if (!last_bumping)
-			{ jump_vel = Vector3.zero; }
+			{
+				jump_vel = Vector3.zero;
+				dash_vel = Vector3.zero;
+			}
 		}
 
 		rigidbody.MovePosition(transform.position + vel * Time.fixedDeltaTime);

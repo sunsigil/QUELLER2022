@@ -97,9 +97,13 @@ Material:
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0.1
+    - _Dither: 1
+    - _Dither_Height: 2.66
+    - _Dither_Size: 2
     - _DstBlend: 0
     - _EnvironmentReflections: 0
     - _Fade: -1.85
+    - _Fade_Height: 1.78
     - _Fade_Max: -2
     - _Fade_Min: -4
     - _FlipbookBlending: 0

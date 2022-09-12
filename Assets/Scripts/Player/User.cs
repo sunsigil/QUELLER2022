@@ -38,6 +38,17 @@ public class User : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if(controller.Pressed(InputCode.SWITCH_LEFT))
+		{ 
+			caster_index = (caster_index - 1) % casters.Length;
+			animator.SetTrigger("Switched");
+		}
+		if (controller.Pressed(InputCode.SWITCH_RIGHT))
+		{
+			caster_index = (caster_index + 1) % casters.Length;
+			animator.SetTrigger("Switched");
+		}
+
 		if (controller.Pressed(InputCode.RHAND))
 		{ shooter.Fire(); }
 

@@ -351,6 +351,9 @@ MonoBehaviour:
   jump_thrust: {x: 10, y: 5}
   air_control: 0.75
   gravity: 9.8
+  dash_speed: 10
+  dash_decay: 0.5
+  kill_y: 0
 --- !u!114 &7101584859758236447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,7 +598,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 484f40dd1dd009647b864c0e0a307e96, type: 2}
+      objectReference: {fileID: 2100000, guid: 3d993d71afda80448a2e69e8037ed953, type: 2}
     - target: {fileID: 5364207419109598804, guid: 319bd0d705a964a409cc99cd424ab04e,
         type: 3}
       propertyPath: m_RootOrder

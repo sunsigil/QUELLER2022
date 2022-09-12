@@ -17,28 +17,31 @@ public class Oharae : MonoBehaviour, ISpellcaster
     [SerializeField]
     Transform anchor;
 
+    AudioWizard audio_wizard;
+
     Timeline charge;
     int count;
     List<Spell> instances;
     
-
     public void Spawn()
     {
-        if(instances == null)
-        { instances = new List<Spell>(); }
-
-        Spell instance = Instantiate(prefab, anchor);
-        instance.Sleep();
-        instances.Add(instance);
+        while(instances.Count < count)
+        {
+            Spell instance = Instantiate(prefab, anchor);
+            instance.Sleep();
+            instances.Add(instance);
+        }
 
         for(int i = 0; i < count; i++)
         {
+            float r = 0.5f;
             float arc = 2 * Mathf.PI / count;
             float theta = arc * i;
+            theta += Mathf.PI * 0.5f;
 
             Vector3 x_arm = anchor.right * Mathf.Cos(theta);
             Vector3 y_arm = anchor.up * Mathf.Sin(theta);
-            Vector3 pos = x_arm + y_arm;
+            Vector3 pos = (x_arm + y_arm) * r;
 
             instances[i].transform.position = anchor.position + pos;
         }
@@ -46,13 +49,11 @@ public class Oharae : MonoBehaviour, ISpellcaster
 
     public void Charge(float amount)
     {
-        if (charge != null)
-        { charge.Tick(amount); }
-        else
-        { charge = new Timeline(charge_time); }
+        charge.Tick(amount);
 
         int last_count = count;
-        count = (int)Mathf.Lerp(min_count, max_count, charge_time);
+        count = (int)Mathf.Lerp(min_count, max_count, charge.progress);
+        print(count);
 
         if(count > last_count)
         { Spawn(); }
@@ -63,10 +64,22 @@ public class Oharae : MonoBehaviour, ISpellcaster
         foreach(Spell instance in instances)
         {
             instance.Wake();
-            instance.Launch(transform.forward * 30);
+            instance.Launch(anchor.forward * 30);
         }
 
-        instances = null;
-        charge = null;
+        charge = new Timeline(charge_time);
+        count = 0;
+        instances = new List<Spell>();
+
+        audio_wizard.PlayEffect("bb_restore");
+    }
+
+    void Awake()
+    {
+        audio_wizard = FindObjectOfType<AudioWizard>();
+
+        charge = new Timeline(charge_time);
+        count = 0;
+        instances = new List<Spell>();
     }
 }

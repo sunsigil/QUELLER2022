@@ -5,11 +5,6 @@ using UnityEngine.Events;
 
 public class Spell : MonoBehaviour
 {
-	[Header("Aesthetics")]
-
-	[SerializeField]
-	string cast_effect;
-
 	[Header("Motion")]
 
 	[SerializeField]
@@ -21,8 +16,6 @@ public class Spell : MonoBehaviour
 	int damage;
 	[SerializeField]
 	bool lethal;
-
-	AudioWizard audio_wizard;
 
 	ParticleSystem particle;
 	Collider collider;
@@ -53,20 +46,16 @@ public class Spell : MonoBehaviour
 	{
 		transform.parent = null;
 		this.target = target;
-		audio_wizard.PlayEffect(cast_effect);
 	}
 
 	public void Launch(Vector3 velocity)
 	{
 		transform.parent = null;
 		this.velocity = velocity;
-		audio_wizard.PlayEffect(cast_effect);
 	}
 
 	void Awake()
 	{
-		audio_wizard = FindObjectOfType<AudioWizard>();
-
 		particle = GetComponent<ParticleSystem>();
 		collider = GetComponent<Collider>();
 

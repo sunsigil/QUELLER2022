@@ -17,6 +17,8 @@ public class Missile : MonoBehaviour, ISpellcaster
     [SerializeField]
     Transform anchor;
 
+    AudioWizard audio_wizard;
+
     Spell instance;
     Timeline charge;
 
@@ -47,7 +49,12 @@ public class Missile : MonoBehaviour, ISpellcaster
         { Spawn(); }
 
         instance.Wake();
-        instance.Launch(transform.forward * 30);
+        instance.Launch(anchor.forward * 30);
         instance = null;
+
+        audio_wizard.PlayEffect("bb_restore");
     }
+
+    void Awake()
+    { audio_wizard = FindObjectOfType<AudioWizard>(); }
 }
