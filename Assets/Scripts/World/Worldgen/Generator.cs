@@ -45,7 +45,7 @@ public class Generator : MonoBehaviour
             }
         }
 
-		PathCell[] mesh_targets = FindObjectsOfType<PathCell>();
+		PathNode[] mesh_targets = FindObjectsOfType<PathNode>();
 		Vector3[] positions = new Vector3[mesh_targets.Length];
 		for(int i = 0; i < positions.Length; i++)
 		{ positions[i] = mesh_targets[i].transform.position; }

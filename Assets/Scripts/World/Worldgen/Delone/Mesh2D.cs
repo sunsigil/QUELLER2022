@@ -57,7 +57,7 @@ public struct Triangle
 	public Triangle(Vector2 a, Vector2 b, Vector2 c)
     {
 		Vector2[] set = new Vector2[] { a, b, c };
-		// DeloneMath.ACWSort(set);
+		DeloneMath.ACWSort(set);
 
 		this.a = set[0];
 		this.b = set[1];
@@ -108,9 +108,9 @@ public struct Triangle
 	public Halfedge[] Vectorize()
     {
 		Halfedge[] halfedges = new Halfedge[3];
-		halfedges[0] = Halfedge.FromPoints(a, b);
-		halfedges[1] = Halfedge.FromPoints(b, c);
-		halfedges[2] = Halfedge.FromPoints(c, a);
+		halfedges[0] = new Halfedge(a, b-a);
+		halfedges[1] = new Halfedge(b, c-b);
+		halfedges[2] = new Halfedge(c, a-c);
 		return halfedges;
     }
 }
@@ -162,9 +162,10 @@ public class Mesh2D
 
 		foreach(Triangle t in triangles)
         {
-			list.Add(Halfedge.FromPoints(t.a, t.b));
-			list.Add(Halfedge.FromPoints(t.b, t.c));
-			list.Add(Halfedge.FromPoints(t.c, t.a));
+			Halfedge[] halfedges = t.Vectorize();
+			list.Add(halfedges[0]);
+			list.Add(halfedges[1]);
+			list.Add(halfedges[2]);
 		}
 
 		return list.ToArray();

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Halfedge : IBoundable
+public struct Halfedge
 {
-    float[] n;
+	float[] n;
 	
 	Vector2 _start;
 	public Vector2 start => _start;
@@ -26,9 +26,6 @@ public struct Halfedge : IBoundable
 	Vector2 _max;
 	public Vector2 max => _max;
 	
-	Bounds _mbr;
-	public Bounds mbr => _mbr;
-	
 	public Halfedge(float sx, float sy, float rx, float ry)
 	{
 		n = new float[4]{ sx, sy, rx, ry };
@@ -43,12 +40,6 @@ public struct Halfedge : IBoundable
 		_top = _bottom == _end ? _start : _end;
 		_min = new Vector2(_left.x, _bottom.y);
 		_max = new Vector2(_right.x, _top.y);
-		
-		Vector2 xz_center = (_start + _end) * 0.5f;
-		Vector2 xz_size = _max - _min;
-		Vector3 center = new Vector3(xz_center.x, 0, xz_center.y);
-		Vector3 size = new Vector3(xz_size.x, 0, xz_size.y);
-		_mbr = new Bounds(center, size);
 	}
 	
 	public Halfedge(Vector2 start, Vector2 reach) : this(start.x, start.y, reach.x, reach.y){}
@@ -63,9 +54,6 @@ public struct Halfedge : IBoundable
 	}
 	public static bool operator !=(Halfedge l, Halfedge r)
 	{ return !(l == r); }
-	
-	public static Halfedge FromPoints(Vector2 a, Vector2 b)
-	{ return new Halfedge(a, b-a); }
 	
 	public Halfedge ScaleBy(float l)
 	{ return new Halfedge(l*n[0], l*n[1], l*n[2], l*n[3]); }
@@ -87,7 +75,4 @@ public struct Halfedge : IBoundable
 	
 	public Halfedge ScaleReach(Vector2 l)
 	{ return new Halfedge(n[0], n[1], l.x*n[2], l.y*n[3]); }
-	
-	public bool Contains(Vector2 v)
-	{ return _start == v || _end == v; }
 }

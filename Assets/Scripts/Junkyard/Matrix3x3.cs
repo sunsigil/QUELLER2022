@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -100,4 +100,4 @@ public struct Matrix3x3
 		n[0][1] * Det2x2(n[1][0], n[1][2], n[2][0], n[2][2]) +
 		n[0][2] * Det2x2(n[1][0], n[1][1], n[2][0], n[2][1]);
 	}
-}
+}*/

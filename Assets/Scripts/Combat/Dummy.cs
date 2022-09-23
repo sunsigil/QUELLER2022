@@ -20,7 +20,7 @@ public class Dummy : MonoBehaviour
 
 	Transform player;
 	bool tracking;
-	Vector3 track_dir;
+	Vector3 track_ray;
 
 	Timeline timeline;
 	
@@ -43,11 +43,11 @@ public class Dummy : MonoBehaviour
 				if(player == null)
 				{ return; }
 
-				track_dir = player.position - transform.position;
-				transform.forward = track_dir;
-
+				track_ray = player.position - transform.position;
+				transform.forward = Vector3.Scale(track_ray, new Vector3(1, 0, 1)).normalized;
+				
 				RaycastHit hit;
-				if(Physics.Raycast(transform.position, track_dir, out hit))
+				if(Physics.Raycast(transform.position, track_ray, out hit))
                 {
 					if(hit.transform == player)
                     { tracking = true; }
@@ -57,8 +57,7 @@ public class Dummy : MonoBehaviour
 			case StateSignal.FIXED_TICK:
 				if(tracking)
                 {
-					Vector3 walk_dir = Vector3.Scale(track_dir, new Vector3(1, 0, 1));
-					rigidbody.MovePosition(transform.position + walk_dir * Time.fixedDeltaTime);
+					rigidbody.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime);
                 }
 			break;
 		}

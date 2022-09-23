@@ -25,8 +25,8 @@ public static class DeloneMath
 	public static void DeloneSort(List<Vector2> vertices)
     { vertices.Sort(DeloneOrderCompare); }
 
-	static float ACWAngleDistance(Vector2 fulcrum, Vector2 p)
-    { return Vector2.SignedAngle(p, fulcrum); }
+	static float ACWAngleDistance(Vector2 fulcrum, Vector2 point)
+    { return Vector2.SignedAngle(point, fulcrum); }
 
 	public static void ACWSort(Vector2[] vertices)
     {

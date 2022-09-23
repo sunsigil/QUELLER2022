@@ -5,8 +5,8 @@ using UnityEditor;
 
 public class RTreeCapture : MonoBehaviour
 {
-	static RTree<PathCell> tree;
-	static PathCell[] cells;
+	static RTree<PathNode> tree;
+	static PathNode[] cells;
 	
 	Bounds[] mbrs;
 	Halfedge[] images;
@@ -14,14 +14,14 @@ public class RTreeCapture : MonoBehaviour
 
 	void Start()
 	{
-		tree = new RTree<PathCell>();
-		cells = FindObjectsOfType<PathCell>();
+		tree = new RTree<PathNode>();
+		cells = FindObjectsOfType<PathNode>();
 		
-		foreach(PathCell cell in cells)
+		foreach(PathNode cell in cells)
 		{ tree.Insert(cell); }
 
 		List<RNode> elements = tree.Elements();
-		List<PathCell> entries = tree.Entries();
+		List<PathNode> entries = tree.Entries();
 		int el = elements.Count;
 		int en = entries.Count;
 		int i = 0;

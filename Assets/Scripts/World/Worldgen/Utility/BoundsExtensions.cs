@@ -9,7 +9,7 @@ public static class BoundsExtensions
 		return a.size.x * a.size.z;
 	}
 	
-    public static bool Contains(this Bounds a, Bounds b)
+	public static bool Contains(this Bounds a, Bounds b)
 	{
 		return 
 		b.min.x >= a.min.x &&
