@@ -11,8 +11,10 @@ public class Targeter : MonoBehaviour
     [SerializeField]
     int capacity;
     
-    List<Combatant> targets;
-    Combatant target;
+    List<Combatant> _targets;
+    public List<Combatant> targets => _targets;
+    Combatant _target;
+    public Combatant target => _target;
 
     static float HDist(Combatant fulcrum, Combatant target)
     {
@@ -23,7 +25,8 @@ public class Targeter : MonoBehaviour
 
     public void Retarget()
     {
-        targets = new List<Combatant>();
+        _targets = new List<Combatant>();
+
         Collider[] hits = Physics.OverlapSphere(transform.position, radius, ~LayerMask.NameToLayer("Character"));
         if(hits.Length == 0)
         { return; }
@@ -38,27 +41,34 @@ public class Targeter : MonoBehaviour
             Combatant candidate = hit.transform.GetComponent<Combatant>();
             if(candidate == null || candidate.faction == faction)
             { continue; }
-            if(candidate == target)
+            if(candidate == _target)
             { target_preserved = true; continue; }
 
-            if (targets.Count < capacity)
+            if (_targets.Count < capacity)
             {
-                print($"Adding: {candidate}");
-                targets.Add(candidate);
+                _targets.Add(candidate);
             }
             else if (target_preserved)
             { break; }
         }
 
         FulcrumComparer<Combatant, float> comparer = new FulcrumComparer<Combatant, float>(GetComponent<Combatant>(), HDist);
-        targets.Sort(comparer);
+        _targets.Sort(comparer);
 
-        if(!target_preserved && targets.Count > 0)
-        { target = targets[0]; }
-        else if(target != null)
-        { targets.Insert(0, target); }
+        if(!target_preserved && _targets.Count > 0)
+        {
+            if(_target != null)
+            { _target.on_untargeted.Invoke(); }
+            _target = _targets[0];
+            _target.on_targeted.Invoke();
+        }
+        else if(_target != null)
+        { _targets.Insert(0, _target); }
+    }
 
-        print($"Targeting: {target}");
+    private void Awake()
+    {
+        _targets = new List<Combatant>();
     }
 
     // Update is called once per frame
@@ -69,19 +79,22 @@ public class Targeter : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(targets != null)
+        if(_targets != null)
         {
             Gizmos.color = Color.red;
-            foreach(Combatant combatant in targets)
+            foreach(Combatant combatant in _targets)
             {
+                if(combatant == null)
+                { return; }
+
                 Gizmos.DrawLine(transform.position, combatant.transform.position);
                 Gizmos.DrawSphere(combatant.transform.position, 0.25f);
             }
         }
-        if(target != null)
+        if(_target != null)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(target.transform.position, 0.5f);
+            Gizmos.DrawWireSphere(_target.transform.position, 0.5f);
         }
     }
 }

@@ -28,9 +28,7 @@ public class Combatant : MonoBehaviour
 	public UnityEvent on_deplete => _on_deplete;
 	UnityEvent _on_die;
 	public UnityEvent on_die => _on_die;
-	
-	Combatant _adversary;
-	public Combatant adversary => _adversary;
+
 	UnityEvent _on_targeted;
 	public UnityEvent on_targeted => _on_targeted;
 	UnityEvent _on_untargeted;
@@ -67,25 +65,16 @@ public class Combatant : MonoBehaviour
 		if(invincible){ return false; }
 		if(nohurt_timeline.progress < 1){ return false; }
 
-		if(attack.sender == this){ return false; }
-		if(attack.sender.faction == _faction){ return false; }
+		if(attack.sender != null)
+        {
+			if (attack.sender == this) { return false; }
+			if (attack.sender.faction == _faction) { return false; }
+		}
 
 		incoming.Enqueue(attack);
 		nohurt_timeline = new Timeline(hurt_cooldown);
 
 		return true;
-	}
-	
-	public void Target(Combatant other)
-	{
-		if(other == this){ return; }
-		if(other == _adversary){ return; }
-		
-		if(_adversary != null)
-		{ _adversary.on_untargeted.Invoke(); }
-
-		if((_adversary = other) != null)
-		{ _adversary.on_targeted.Invoke(); }
 	}
 
 	void Awake()

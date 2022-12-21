@@ -5,11 +5,6 @@ using UnityEngine.Events;
 
 public class Spell : MonoBehaviour
 {
-	[Header("Motion")]
-
-	[SerializeField]
-	float smoothing;
-
 	[Header("Damage")]
 
 	[SerializeField]
@@ -21,8 +16,9 @@ public class Spell : MonoBehaviour
 	Collider collider;
 
 	Combatant sender;
-	Transform target;
-	Vector3 velocity;
+	Combatant target;
+	Vector3 direction;
+	float speed;
 
 	UnityEvent on_hit;
 
@@ -42,16 +38,18 @@ public class Spell : MonoBehaviour
 		{ particle.Play(); }
 	}
 
-	public void Target(Transform target)
+	public void Target(Combatant target, float speed)
 	{
 		transform.parent = null;
 		this.target = target;
+		this.speed = speed;
 	}
 
 	public void Launch(Vector3 velocity)
 	{
 		transform.parent = null;
-		this.velocity = velocity;
+		speed = velocity.magnitude;
+		direction = velocity.normalized;
 	}
 
 	void Awake()
@@ -61,7 +59,8 @@ public class Spell : MonoBehaviour
 
 		sender = transform.root.GetComponentInChildren<Combatant>();
 		target = null;
-		velocity = Vector3.zero;
+		direction = Vector3.zero;
+		speed = 0;
 
 		on_hit = new UnityEvent();
 		on_hit.AddListener(delegate { Destroy(gameObject); });
@@ -71,11 +70,12 @@ public class Spell : MonoBehaviour
     {
 		if(target != null)
         {
-			Vector3 line = target.position - transform.position;
-			velocity = Vector3.Lerp(velocity, line, 1 - smoothing);
+			Vector3 line = target.transform.position - transform.position;
+			direction = line.normalized;
+			transform.forward = direction;
         }
 
-		transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
+		transform.Translate(direction * speed * Time.fixedDeltaTime, Space.World);
 	}
 	
     void OnTriggerEnter(Collider collider)
@@ -85,7 +85,7 @@ public class Spell : MonoBehaviour
 			Combatant target = collider.GetComponent<Combatant>();
 			if(target != null)
 			{
-				bool hit = target.EnqueueAttack(new Attack(sender, velocity, damage, lethal));
+				bool hit = target.EnqueueAttack(new Attack(sender, direction * speed, damage, lethal));
 				if(hit)
 				{ on_hit.Invoke(); }
 			}

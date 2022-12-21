@@ -19,6 +19,8 @@ public class Oharae : MonoBehaviour, ISpellcaster
 
     AudioWizard audio_wizard;
 
+    Targeter targeter;
+
     Timeline charge;
     int count;
     List<Spell> instances;
@@ -60,11 +62,20 @@ public class Oharae : MonoBehaviour, ISpellcaster
     }
 
     public void Cast()
-    {   
-        foreach(Spell instance in instances)
+    {
+        int i = 0;
+        int j = 0;
+        for(; i < instances.Count; i++)
         {
-            instance.Wake();
-            instance.Launch(anchor.forward * 30);
+            instances[i].Wake();
+
+            if(j < targeter.targets.Count)
+            {
+                instances[i].Target(targeter.targets[j], 30);
+                j++;
+            }
+            else
+            { instances[i].Launch(anchor.forward * 30); }
         }
 
         charge = new Timeline(charge_time);
@@ -77,6 +88,8 @@ public class Oharae : MonoBehaviour, ISpellcaster
     void Awake()
     {
         audio_wizard = FindObjectOfType<AudioWizard>();
+
+        targeter = GetComponent<Targeter>();
 
         charge = new Timeline(charge_time);
         count = 0;

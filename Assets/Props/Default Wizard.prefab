@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8159039823798201140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8159039823798201141}
+  - component: {fileID: 8159039823798201136}
+  - component: {fileID: 8159039823798201143}
+  - component: {fileID: 8159039823798201142}
+  - component: {fileID: 8159039823798201137}
+  - component: {fileID: 8159039823798201138}
+  m_Layer: 0
+  m_Name: Default Wizard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8159039823798201141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8159039823798201136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c978b19dbd2abc04fbd15dfccd428d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  save_path: playthrough.txt
+  operate: 0
+--- !u!114 &8159039823798201143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff27071c0ffa9848832c287f8591c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scheme_file: {fileID: 4900000, guid: 276a9d167f60a644b90f5442e8dea89a, type: 3}
+--- !u!114 &8159039823798201142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecc651e67ecd2b47966a8dd15a4cf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music_mixer: {fileID: -2780117001274780269, guid: 569193b79b1f0ae43b8b9683233c58aa,
+    type: 2}
+  effect_mixer: {fileID: -4168169227181882061, guid: 569193b79b1f0ae43b8b9683233c58aa,
+    type: 2}
+  garbage_threshold: 50
+  garbage_cooldown: 5
+--- !u!114 &8159039823798201137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1868d48730a38e247a244d9fdab2d73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unmanaged: 1
+  _control_layer: 1
+  console_prefab: {fileID: 2055206521690229701, guid: 0cd24b5883ac45f45852ae51b80b65e7,
+    type: 3}
+  startup_file: {fileID: 4900000, guid: 010b1f970f3f1694bbc906905b3a959e, type: 3}
+  enable_commands: 1
+--- !u!114 &8159039823798201138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159039823798201140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8489fcd83927c42b5396afc3fe3e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoid: 0
+  blueprint: {fileID: 0}
+  genset: {fileID: 0}
+  origin: {x: 0, y: 0, z: 0}

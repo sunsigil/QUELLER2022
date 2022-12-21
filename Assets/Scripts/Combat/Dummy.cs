@@ -9,23 +9,15 @@ public class Dummy : MonoBehaviour
 {
 	[SerializeField]
 	GameObject deathblow_dot;
-	[SerializeField]
-	GameObject target_ring;
 	
 	AudioWizard audio_wizard;
 	
 	Combatant combatant;
 	Machine machine;
 	Rigidbody rigidbody;
-
-	Transform player;
-	bool tracking;
-	Vector3 track_ray;
+	Targeter targeter;
 
 	Timeline timeline;
-	
-	void Hurt()
-	{ print("Ouch!"); }
 	
 	void Die()
 	{ 
@@ -37,27 +29,12 @@ public class Dummy : MonoBehaviour
 	{
 		switch(signal)
 		{
-			case StateSignal.TICK:
-				tracking = false;
-
-				if(player == null)
-				{ return; }
-
-				track_ray = player.position - transform.position;
-				transform.forward = Vector3.Scale(track_ray, new Vector3(1, 0, 1)).normalized;
-				
-				RaycastHit hit;
-				if(Physics.Raycast(transform.position, track_ray, out hit))
-                {
-					if(hit.transform == player)
-                    { tracking = true; }
-                }
-			break;
-
 			case StateSignal.FIXED_TICK:
-				if(tracking)
+				if(targeter.target != null)
                 {
-					rigidbody.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime);
+					Vector3 track_ray = targeter.target.transform.position - transform.position;
+					transform.forward = Vector3.Scale(track_ray, new Vector3(1, 0, 1)).normalized;
+					rigidbody.MovePosition(transform.position + transform.forward * 5 * Time.fixedDeltaTime);
                 }
 			break;
 		}
@@ -94,18 +71,13 @@ public class Dummy : MonoBehaviour
 		combatant = GetComponent<Combatant>();
 		machine = GetComponent<Machine>();
 		rigidbody = GetComponent<Rigidbody>();
+		targeter = GetComponent<Targeter>();
 	}
 	
 	void Start()
 	{
-		combatant.on_hurt.AddListener(Hurt);
 		combatant.on_deplete.AddListener(delegate{ machine.Transition(Depleted); });
 		combatant.on_die.AddListener(Die);
-		
-		combatant.on_targeted.AddListener(delegate{ target_ring.SetActive(true); });
-		combatant.on_untargeted.AddListener(delegate{ target_ring.SetActive(false); });
-
-		player = FindObjectOfType<User>().transform;
 
 		machine.Transition(Active);
 	}

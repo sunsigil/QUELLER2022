@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class CommandConsole : MonoBehaviour
@@ -228,6 +230,11 @@ public class CommandConsole : MonoBehaviour
 
     void OnEnable()
     {
+        PointerEventData e = new PointerEventData(EventSystem.current);
+        e.button = PointerEventData.InputButton.Left;
+        EventSystem.current.SetSelectedGameObject(prompt.gameObject, e);
+        prompt.OnPointerClick(e);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }

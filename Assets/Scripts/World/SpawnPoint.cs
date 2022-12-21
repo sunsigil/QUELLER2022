@@ -7,8 +7,6 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField]
 	GameObject prefab;
 	[SerializeField]
-	bool looping;
-	[SerializeField]
 	Color colour = Color.green;
 	
 	GameObject instance;
@@ -25,15 +23,6 @@ public class SpawnPoint : MonoBehaviour
 		instance = Instantiate(prefab);
 		Reorient();
 	}
-	
-	void Awake()
-	{ Respawn(); }
-
-    private void Update()
-    {
-        if(looping && instance == null)
-		{ Respawn(); }
-    }
 
     void OnDrawGizmos()
 	{

@@ -63,6 +63,12 @@ public class User : MonoBehaviour
 			animator.SetBool("Firing", false);
 		}
 
+		if(controller.Pressed(InputCode.CONFIRM))
+        {
+			FindObjectOfType<HUD>().PushNotification("AIEEEEEEE!!!!");
+			GetComponent<Combatant>().EnqueueAttack(new Attack(null, Vector3.zero, 10, true));
+        }
+
 		animator.SetBool("Running", runner.running);
     }
 }

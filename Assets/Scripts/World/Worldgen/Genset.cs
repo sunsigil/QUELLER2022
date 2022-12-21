@@ -34,7 +34,8 @@ public class Genset : ScriptableObject
 
     public void Prime()
     {
-        foreach(GameObject tile in tiles){ Destroy(tile); }
+        if(tiles != null)
+        { foreach (GameObject tile in tiles) { Destroy(tile); } }
 
         tiles = new GameObject[]
         {
